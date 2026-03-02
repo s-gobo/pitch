@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+  <title>pitch</title>
+  <script src="name.js" defer></script>
+</head>
+<body>
+  <input class="note" name="C" type="checkbox">C<br>
+  <input class="note" name="C#" type="checkbox">C#<br>
+  <input class="note" name="D" type="checkbox">D<br>
+  <input class="note" name="D#" type="checkbox">D#<br>
+  <input class="note" name="E" type="checkbox">E<br>
+  <input class="note" name="F" type="checkbox">F<br>
+  <input class="note" name="F#" type="checkbox">F#<br>
+  <input class="note" name="G" type="checkbox">G<br>
+  <input class="note" name="G#" type="checkbox">G#<br>
+  <input class="note" name="A" type="checkbox">A<br>
+  <input class="note" name="A#" type="checkbox">A#<br>
+  <input class="note" name="B" type="checkbox">B<br>
+  <div id="out"></div>
+  <script defer>
+    const notes = document.getElementsByClassName("note");
+    
+    const run = () => {
+      let input = [];
+      for (let note of notes) {
+        if (note.checked) {
+          input.push(note.name)
+        }
+      }
+      
+      document.getElementById("out").innerText = input == [] ? "" : name(input);
+    }
+    
+    for (let note of notes) {
+      note.addEventListener("input", run);
+    }
+  </script>
+</body>
