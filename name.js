@@ -86,7 +86,6 @@ const name = (notes) => {
     
     // 7ths
     
-    // TODO
     
     // adds
     
@@ -108,6 +107,9 @@ const name = (notes) => {
     for (let interval of intervals) {
       chord.add("add" + addNames[interval]);
     }
+    
+    // maj is implied
+    chord.delete("maj")
     
     sheets.push(intervals);
   }
