@@ -17,6 +17,7 @@
   <input class="note" name="A#" type="checkbox">A#<br>
   <input class="note" name="B" type="checkbox">B<br>
   <div id="out"></div>
+  <button id="resetButton">Reset Chord</button>
   <script defer>
     const notes = document.getElementsByClassName("note");
     
@@ -41,5 +42,17 @@
     for (let note of notes) {
       note.addEventListener("input", run);
     }
+    
+    
+    
+    
+    const reset = () => {
+      console.log("resetting")
+      for (let note of notes) {
+        note.checked = false;
+      }
+    }
+    
+    document.getElementById("resetButton").onclick = reset;
   </script>
 </body>
