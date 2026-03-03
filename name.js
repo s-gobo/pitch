@@ -58,11 +58,17 @@ const name = (notes) => {
     
     if (!prf5()) {
       if (aug5()) {
-        chord.delete("maj")
-        chord.add("aug");
+        if (chord.delete("maj")) {
+          chord.add("aug");
+        } else {
+          chord.add("aug5");
+        }
       } else if (dim5()) {
-        chord.delete("min")
-        chord.add("dim");
+        if (chord.delete("min")) {
+          chord.add("dim");
+        } else {
+          chord.add("dim5");
+        }
       } else {
         chord.add("no5");
       }
