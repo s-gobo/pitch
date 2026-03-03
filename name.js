@@ -93,12 +93,12 @@ const name = (notes) => {
     
     if (chord.has("7") && !chord.has("dim")) {
       if (maj9()) {
-        chord.remove("7");
+        chord.delete("7");
         chord.add("9");
       }
     } else if (chord.has("maj7")) {
       if (maj9()) {
-        chord.remove("maj7");
+        chord.delete("maj7");
         chord.add("maj9");
       }
     }
@@ -108,10 +108,10 @@ const name = (notes) => {
     let prf11 = () => intervals.delete(5);
     
     if (chord.has("9") && prf11()) {
-      chord.remove("9");
+      chord.delete("9");
       chord.add("11");
-    } else if (chord.has("maj9" && prf11())) {
-      chord.remove("maj9");
+    } else if (chord.has("maj9") && prf11()) {
+      chord.delete("maj9");
       chord.add("maj11");
     }
     
@@ -120,17 +120,17 @@ const name = (notes) => {
     let maj13 = () => intervals.delete(9);
     
     if (chord.has("11") && maj13()) {
-      chord.remove("11");
+      chord.delete("11");
       chord.add("13");
-    } else if (chord.has("maj11" && maj13())) {
-      chord.remove("maj11");
+    } else if (chord.has("maj11") && maj13()) {
+      chord.delete("maj11");
       chord.add("maj13");
     } else if (chord.has("7") && !chord.has("dim")) {
       if (intervals.has(5) && intervals.has(9)) {
         prf11();
         maj13();
         
-        chord.remove("7");
+        chord.delete("7");
         chord.add("13");
         chord.add("no9");
       }
@@ -139,7 +139,7 @@ const name = (notes) => {
         prf11();
         maj13();
         
-        chord.remove("maj7");
+        chord.delete("maj7");
         chord.add("maj13");
         chord.add("no9");
       }
@@ -189,6 +189,6 @@ const name = (notes) => {
   return [...chords[0]].join("");
 }
 
-let re = name(["C", "E", "G"]);
+let re = name(["C", "E", "G", "B", "D"]);
 console.log(re);
 let a;
