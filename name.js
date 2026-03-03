@@ -69,6 +69,82 @@ const name = (notes) => {
       }
     }
     
+    // 7ths
+    
+    let dim7 = () => intervals.delete(9);
+    let maj7 = () => intervals.delete(10);
+    let min7 = () => intervals.delete(11);
+    
+    if (chord.has("dim") && dim7()) {
+      chord.add("7");
+    } else if (min7()) {
+      if (chord.has("dim")) {
+        chord.add("min7")
+      } else {
+        chord.add("7")
+      }
+    } else if (maj7()) {
+      chord.add("maj7")
+    }
+    
+    // 9ths
+    
+    let maj9 = () => intervals.delete(2);
+    
+    if (chord.has("7") && !chord.has("dim")) {
+      if (maj9()) {
+        chord.remove("7");
+        chord.add("9");
+      }
+    } else if (chord.has("maj7")) {
+      if (maj9()) {
+        chord.remove("maj7");
+        chord.add("maj9");
+      }
+    }
+    
+    // 11ths
+    
+    let prf11 = () => intervals.delete(5);
+    
+    if (chord.has("9") && prf11()) {
+      chord.remove("9");
+      chord.add("11");
+    } else if (chord.has("maj9" && prf11())) {
+      chord.remove("maj9");
+      chord.add("maj11");
+    }
+    
+    // 13ths
+    
+    let maj13 = () => intervals.delete(9);
+    
+    if (chord.has("11") && maj13()) {
+      chord.remove("11");
+      chord.add("13");
+    } else if (chord.has("maj11" && maj13())) {
+      chord.remove("maj11");
+      chord.add("maj13");
+    } else if (chord.has("7") && !chord.has("dim")) {
+      if (intervals.has(5) && intervals.has(9)) {
+        prf11();
+        maj13();
+        
+        chord.remove("7");
+        chord.add("13");
+        chord.add("no9");
+      }
+    } else if (chord.has("maj7")) {
+      if (intervals.has(5) && intervals.has(9)) {
+        prf11();
+        maj13();
+        
+        chord.remove("maj7");
+        chord.add("maj13");
+        chord.add("no9");
+      }
+    }
+    
     // sustains
     
     let prf4 = () => intervals.delete(5);
@@ -83,10 +159,6 @@ const name = (notes) => {
         chord.add("sus2");
       }
     }
-    
-    // 7ths
-    
-    // TODO
     
     // adds
     
@@ -108,6 +180,9 @@ const name = (notes) => {
     for (let interval of intervals) {
       chord.add("add" + addNames[interval]);
     }
+    
+    // maj is implied
+    chord.delete("maj")
     
     sheets.push(intervals);
   }
