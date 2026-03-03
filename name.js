@@ -16,7 +16,6 @@ const allNotes = [
 const setToString = s => JSON.stringify([...s]);
 
 const name = (notes) => {
-  let sheets = [];
   let chords = [];
   for (let note of notes) {
     let chord = new Set([note]);
@@ -183,8 +182,6 @@ const name = (notes) => {
     
     // maj is implied
     chord.delete("maj")
-    
-    sheets.push(intervals);
   }
   return [...chords[0]].join("");
 }
