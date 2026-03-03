@@ -28,7 +28,12 @@
         }
       }
       
-      document.getElementById("out").innerText = input == [] ? "" : name(input);
+      let output = "";
+      if (input.length != 0) {
+        output = name(input);
+      }
+      
+      document.getElementById("out").innerText = output;
     }
     
     for (let note of notes) {
