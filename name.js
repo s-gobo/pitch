@@ -229,7 +229,34 @@ const name = (notes) => {
     }
   }
   
-  return [...bestChord].join("");
+  const nameOrder = [
+    "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
+    "maj", "min",
+    "aug", "dim", "aug5", "dim5",
+    "7", "min7",
+    "9", "min9",
+    "11", "min11",
+    "13", "min13",
+    "sus2", "sus4",
+    "no9", "no3", "no5",
+    "addb2",
+    "add2",
+    "addb3",
+    "add4",
+    "addb5",
+    "addb6",
+    "add6",
+    "add7",
+  ];
+  
+  let string = "";
+  for (let name of nameOrder) {
+    if (bestChord.has(name)) {
+      string += name;
+    }
+  }
+  
+  return string;
 }
 
 let re = name(["C", "E", "G", "B", "D"]);
