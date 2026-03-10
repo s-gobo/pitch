@@ -92,6 +92,14 @@ const name = (notes) => {
       chord.add("maj7")
     }
     
+    // 6ths
+    
+    let maj6 = () => intervals.delete(9);
+    
+    if (!chord.has("7") && !chord.has("maj7") && !chord.has("dim") && maj6()) {
+      chord.add("6");
+    }
+    
     // 9ths
     
     let maj9 = () => intervals.delete(2);
@@ -194,7 +202,7 @@ const name = (notes) => {
   const componentRanking = {
     "C": 0, "C#": 0.01, "D": 0, "D#": 0.01, "E": 0, "F": 0, "F#": 0.01, "G": 0, "G#": 0.01, "A": 0, "A#": 0.01, "B": 0,
     maj: 1, min: 2, no3: 15, aug: 10.1, dim: 10, aug5: 23.2, dim5: 23, no5: 14,
-    7: 4, min7: 4,
+    7: 4, min7: 4, 6:12,
     9: 4, min9: 4,
     11: 4, min11: 4,
     13: 4, min13: 4,
@@ -233,7 +241,7 @@ const name = (notes) => {
     "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
     "maj", "min",
     "aug", "dim",
-    "7", "min7",
+    "7", "min7", "6",
     "9", "min9",
     "11", "min11",
     "13", "min13",
