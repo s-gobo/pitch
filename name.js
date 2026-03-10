@@ -217,26 +217,6 @@ const name = (notes) => {
     add6: 50,
     add7: 50,
   }
-  
-  let bestChord = chords[0];
-  let bestChordScore = 10000000;
-  for (let chord of chords) {
-    let score = 0;
-    for (let component of chord) {
-      score += componentRanking[component];
-    }
-    if (chord.has("dim") || chord.has("aug")) {
-      if (chord.has("sus4") || chord.has("sus2") || chord.has("no3")) {
-        score += 80;
-      }
-    }
-    
-    if (score < bestChordScore) {
-      bestChordScore = score;
-      bestChord = chord;
-    }
-  }
-  
   const nameOrder = [
     "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
     "maj", "min",
@@ -258,14 +238,29 @@ const name = (notes) => {
     "add7",
   ];
   
-  let string = "";
-  for (let name of nameOrder) {
-    if (bestChord.has(name)) {
-      string += name;
+  let re = [];
+  for (let chord of chords) {
+    let score = 0;
+    for (let component of chord) {
+      score += componentRanking[component];
     }
+    if (chord.has("dim") || chord.has("aug")) {
+      if (chord.has("sus4") || chord.has("sus2") || chord.has("no3")) {
+        score += 80;
+      }
+    }
+    
+    let string = "";
+    for (let name of nameOrder) {
+      if (chord.has(name)) {
+        string += name;
+      }
+    }
+    
+    re.push({chord:chord, score:score, name:string});
   }
   
-  return string;
+  return re;
 }
 
 let re = name(["C", "E", "G", "B", "D"]);
