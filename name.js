@@ -92,6 +92,14 @@ const name = (notes) => {
       chord.add("maj7")
     }
     
+    // 6ths
+    
+    let maj6 = () => intervals.delete(9);
+    
+    if (!chord.has("7") && !chord.has("maj7") && !chord.has("dim") && maj6()) {
+      chord.add("6");
+    }
+    
     // 9ths
     
     let maj9 = () => intervals.delete(2);
@@ -194,7 +202,7 @@ const name = (notes) => {
   const componentRanking = {
     "C": 0, "C#": 0.01, "D": 0, "D#": 0.01, "E": 0, "F": 0, "F#": 0.01, "G": 0, "G#": 0.01, "A": 0, "A#": 0.01, "B": 0,
     maj: 1, min: 2, no3: 15, aug: 10.1, dim: 10, aug5: 23.2, dim5: 23, no5: 14,
-    7: 4, min7: 4,
+    7: 4, min7: 4, 6:12,
     9: 4, min9: 4,
     11: 4, min11: 4,
     13: 4, min13: 4,
@@ -209,35 +217,16 @@ const name = (notes) => {
     add6: 50,
     add7: 50,
   }
-  
-  let bestChord = chords[0];
-  let bestChordScore = 10000000;
-  for (let chord of chords) {
-    let score = 0;
-    for (let component of chord) {
-      score += componentRanking[component];
-    }
-    if (chord.has("dim") || chord.has("aug")) {
-      if (chord.has("sus4") || chord.has("sus2") || chord.has("no3")) {
-        score += 80;
-      }
-    }
-    
-    if (score < bestChordScore) {
-      bestChordScore = score;
-      bestChord = chord;
-    }
-  }
-  
   const nameOrder = [
     "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
     "maj", "min",
-    "aug", "dim", "aug5", "dim5",
-    "7", "min7",
+    "aug", "dim",
+    "7", "min7", "6",
     "9", "min9",
     "11", "min11",
     "13", "min13",
     "sus2", "sus4",
+    "aug5", "dim5",
     "no9", "no3", "no5",
     "addb2",
     "add2",
@@ -249,14 +238,29 @@ const name = (notes) => {
     "add7",
   ];
   
-  let string = "";
-  for (let name of nameOrder) {
-    if (bestChord.has(name)) {
-      string += name;
+  let re = [];
+  for (let chord of chords) {
+    let score = 0;
+    for (let component of chord) {
+      score += componentRanking[component];
     }
+    if (chord.has("dim") || chord.has("aug")) {
+      if (chord.has("sus4") || chord.has("sus2") || chord.has("no3")) {
+        score += 80;
+      }
+    }
+    
+    let string = "";
+    for (let name of nameOrder) {
+      if (chord.has(name)) {
+        string += name;
+      }
+    }
+    
+    re.push({chord:chord, score:score, name:string});
   }
   
-  return string;
+  return re;
 }
 
 let re = name(["C", "E", "G", "B", "D"]);
