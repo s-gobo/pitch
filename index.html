@@ -16,6 +16,11 @@
   <input class="note" name="A" type="checkbox">A<br>
   <input class="note" name="A#" type="checkbox">A#<br>
   <input class="note" name="B" type="checkbox">B<br>
+  <div id="out" style="display: none;">
+    <div></div>
+    <button id="toggleEqButton" name="toggleEquivalent">Show equivalent chords</button>
+    <div id="eqChords" style="display: none;">TESTTTTs</div>
+  </div>
   <div id="out"></div>
   <button id="resetButton">Reset Chord</button>
   <script defer>
@@ -36,13 +41,38 @@
         output = name(input);
       }
       
-      document.getElementById("out").innerText = output[0].name;
+      out = document.getElementById("out")
+      if (output.length == 0) {
+        out.style.display = "none";
+      } else {
+        out.style.display = "block";
+        out.firstElementChild.innerText = output[0].name;
+        
+        extra.innerHTML = "";
+        for (let chord of output) {
+          extra.innerHTML += `${chord.name} <span style="opacity: 0.5">${chord.score}</span><br>`
+        }
+      }
     }
     
     for (let note of notes) {
       note.addEventListener("input", run);
     }
     
+    const toggleButton = document.getElementById("toggleEqButton");
+    const extra = document.getElementById("eqChords");
+    
+    const toggleChord = (() => {
+      let on = false;
+      return () => {
+        on = !on;
+        extra.style.display = on ? "block" : "none";
+        toggleButton.textContent = on ? "Hide" : "Show";
+        toggleButton.textContent += " equivalent chords"
+      };
+    })();
+    
+    toggleButton.addEventListener("click", toggleChord);
     
     
     
