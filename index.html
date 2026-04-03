@@ -45,6 +45,11 @@
       } else {
         out.style.display = "block";
         out.firstElementChild.innerText = output[0].name;
+        
+        extra.innerHTML = "";
+        for (let chord of output) {
+          extra.innerHTML += `${chord.name} <span style="opacity: 0.5">${chord.score}</span><br>`
+        }
       }
     }
     
