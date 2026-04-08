@@ -46,7 +46,7 @@
         out.style.display = "none";
       } else {
         out.style.display = "block";
-        out.firstElementChild.innerText = output[0].name;
+        out.firstElementChild.innerText = output.toSorted((a, b) => a.score - b.score)[0].name;
         
         extra.innerHTML = "";
         for (let chord of output) {
