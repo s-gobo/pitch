@@ -227,7 +227,7 @@ const name = (notes) => {
     "13", "maj13",
     "sus2", "sus4",
     "aug5", "dim5",
-    "no9", "no3", "no5",
+    "no3", "no5", "no9",
     "addb2",
     "add2",
     "addb3",
