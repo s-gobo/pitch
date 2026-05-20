@@ -77,8 +77,8 @@ const name = (notes) => {
     // 7ths
     
     let dim7 = () => intervals.delete(9);
-    let maj7 = () => intervals.delete(10);
-    let min7 = () => intervals.delete(11);
+    let min7 = () => intervals.delete(10);
+    let maj7 = () => intervals.delete(11);
     
     if (chord.has("dim") && dim7()) {
       chord.add("7");
