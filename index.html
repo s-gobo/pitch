@@ -21,6 +21,8 @@
     <button id="toggleEqButton" name="toggleEquivalent">Show equivalent chords</button>
     <div id="eqChords" style="display: none;">TESTTTTs</div>
   </div>
+  <div id="out"></div>
+  <button id="resetButton">Reset Chord</button>
   <script defer>
     const notes = document.getElementsByClassName("note");
     
@@ -71,5 +73,17 @@
     })();
     
     toggleButton.addEventListener("click", toggleChord);
+    
+    
+    
+    const reset = () => {
+      console.log("resetting")
+      for (let note of notes) {
+        note.checked = false;
+      }
+      run();
+    }
+    
+    document.getElementById("resetButton").onclick = reset;
   </script>
 </body>
