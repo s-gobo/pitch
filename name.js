@@ -77,8 +77,8 @@ const name = (notes) => {
     // 7ths
     
     let dim7 = () => intervals.delete(9);
-    let maj7 = () => intervals.delete(10);
-    let min7 = () => intervals.delete(11);
+    let min7 = () => intervals.delete(10);
+    let maj7 = () => intervals.delete(11);
     
     if (chord.has("dim") && dim7()) {
       chord.add("7");
@@ -200,14 +200,15 @@ const name = (notes) => {
   
   // rank chords
   const componentRanking = {
-    "C": 0, "C#": 0.01, "D": 0, "D#": 0.01, "E": 0, "F": 0, "F#": 0.01, "G": 0, "G#": 0.01, "A": 0, "A#": 0.01, "B": 0,
-    maj: 1, min: 2, no3: 15, aug: 10.1, dim: 10, aug5: 23.2, dim5: 23, no5: 14,
-    7: 4, maj7: 4, 6:12,
-    9: 4, maj9: 4,
-    11: 4, maj11: 4,
-    13: 4, maj13: 4,
+    "C": 0, "C#": 1, "D": 0, "D#": 1, "E": 0, "F": 0, "F#": 1, "G": 0, "G#": 1, "A": 0, "A#": 1, "B": 0,
+    maj: 0, min: 2, no3: 15,
+    aug: 32, dim: 31, aug5: 54, dim5: 53, no5: 10,
+    7: 20, maj7: 25, 6:30,
+    9: 35, maj9: 45,
+    11: 50, maj11: 65,
+    13: 70, maj13: 85,
     no9: 19,
-    sus2: 11, sus4: 10.5,
+    sus2: 21, sus4: 20,
     addb2: 56,
     add2: 40,
     addb3: 55,
@@ -216,7 +217,29 @@ const name = (notes) => {
     addb6: 58,
     add6: 50,
     add7: 50,
+    "add#7": 60,
   }
+  
+  // // rank chords
+  // const componentRanking = {
+  //   "C": 0, "C#": 0.01, "D": 0, "D#": 0.01, "E": 0, "F": 0, "F#": 0.01, "G": 0, "G#": 0.01, "A": 0, "A#": 0.01, "B": 0,
+  //   maj: 1, min: 2, no3: 15, aug: 10.1, dim: 10, aug5: 23.2, dim5: 23, no5: 14,
+  //   7: 4, maj7: 4, 6:12,
+  //   9: 4, maj9: 4,
+  //   11: 4, maj11: 4,
+  //   13: 4, maj13: 4,
+  //   no9: 19,
+  //   sus2: 11, sus4: 10.5,
+  //   addb2: 56,
+  //   add2: 40,
+  //   addb3: 55,
+  //   add4: 40,
+  //   addb5: 52,
+  //   addb6: 58,
+  //   add6: 50,
+  //   add7: 50,
+  // }
+  
   const nameOrder = [
     "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
     "maj", "min",
@@ -227,7 +250,7 @@ const name = (notes) => {
     "13", "maj13",
     "sus2", "sus4",
     "aug5", "dim5",
-    "no9", "no3", "no5",
+    "no3", "no5", "no9",
     "addb2",
     "add2",
     "addb3",
@@ -236,6 +259,7 @@ const name = (notes) => {
     "addb6",
     "add6",
     "add7",
+    "add#7",
   ];
   
   let re = [];
