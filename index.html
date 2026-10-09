@@ -1,58 +1,88 @@
 <!DOCTYPE html>
+
 <head>
   <title>pitch</title>
   <script src="name.js" defer></script>
-</head>
-<body>
-  <input class="note" name="C" type="checkbox">C<br>
-  <input class="note" name="C#" type="checkbox">C#<br>
-  <input class="note" name="D" type="checkbox">D<br>
-  <input class="note" name="D#" type="checkbox">D#<br>
-  <input class="note" name="E" type="checkbox">E<br>
-  <input class="note" name="F" type="checkbox">F<br>
-  <input class="note" name="F#" type="checkbox">F#<br>
-  <input class="note" name="G" type="checkbox">G<br>
-  <input class="note" name="G#" type="checkbox">G#<br>
-  <input class="note" name="A" type="checkbox">A<br>
-  <input class="note" name="A#" type="checkbox">A#<br>
-  <input class="note" name="B" type="checkbox">B<br>
-  <div id="out"></div>
-  <button id="resetButton">Reset Chord</button>
-  <script defer>
-    const notes = document.getElementsByClassName("note");
+  <style>
+    section {
+      display: inline-table;
+      border: black 1px dashed;
+      padding: 1em;
+      margin: .5em;
+      width: 300px;
+      border-radius: 10px;
+      corner-shape: squircle;
+    }
+    section h1 {
+      margin-top: 0;
+    }
     
-    const run = () => {
-      let input = [];
+    .chord {
+      stroke: black;
+      stroke-width: 2;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <h1>Name</h1>
+    <p>
+      <input class="note" name="C" type="checkbox">C<br>
+      <input class="note" name="C#" type="checkbox">C#<br>
+      <input class="note" name="D" type="checkbox">D<br>
+      <input class="note" name="D#" type="checkbox">D#<br>
+      <input class="note" name="E" type="checkbox">E<br>
+      <input class="note" name="F" type="checkbox">F<br>
+      <input class="note" name="F#" type="checkbox">F#<br>
+      <input class="note" name="G" type="checkbox">G<br>
+      <input class="note" name="G#" type="checkbox">G#<br>
+      <input class="note" name="A" type="checkbox">A<br>
+      <input class="note" name="A#" type="checkbox">A#<br>
+      <input class="note" name="B" type="checkbox">B<br>
+    </p>
+    <button id="resetButton">Reset Chord</button>
+    <div id="out" style="margin-top: 1em;"></div>
+    <script defer>
+      const notes = document.getElementsByClassName("note");
+
+      const run = () => {
+        let input = [];
+        for (let note of notes) {
+          if (note.checked) {
+            input.push(note.name)
+          }
+        }
+
+        console.log(input);
+
+        let output = "";
+        if (input.length != 0) {
+          output = name(input);
+        }
+
+        document.getElementById("out").innerText = output;
+      }
+
       for (let note of notes) {
-        if (note.checked) {
-          input.push(note.name)
+        note.addEventListener("input", run);
+      }
+
+
+
+
+      const reset = () => {
+        console.log("resetting")
+        for (let note of notes) {
+          note.checked = false;
         }
       }
-      
-      console.log(input);
-      
-      let output = "";
-      if (input.length != 0) {
-        output = name(input);
-      }
-      
-      document.getElementById("out").innerText = output;
-    }
+
+      document.getElementById("resetButton").onclick = reset;
+    </script>
+  </section>
+  <section>
+    <h1>Pick</h1>
     
-    for (let note of notes) {
-      note.addEventListener("input", run);
-    }
-    
-    
-    
-    
-    const reset = () => {
-      console.log("resetting")
-      for (let note of notes) {
-        note.checked = false;
-      }
-    }
-    
-    document.getElementById("resetButton").onclick = reset;
-  </script>
+  </section>
 </body>
